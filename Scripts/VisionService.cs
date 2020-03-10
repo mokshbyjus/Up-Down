@@ -15,7 +15,7 @@ namespace Byjus.VisionTest {
 
             var ret = new List<ExtInput>();
             for (int i = 0; i < numBlue; i++) { ret.Add(new ExtInput { type = ExtInput.TileType.BLUE_ROD, id = i }); }
-            for (int i = 0; i < numRed; i++) { ret.Add(new ExtInput { type = ExtInput.TileType.RED_CUBE, id = (numBlue + i) * 10 }); }
+            for (int i = 0; i < numRed; i++) { ret.Add(new ExtInput { type = ExtInput.TileType.RED_CUBE, id = (numBlue + i) + 1000 }); }
 
             return ret;
         }
