@@ -5,15 +5,12 @@ using UnityEngine;
 #if !CC_STANDALONE
 using Osmo.SDK;
 using Osmo.Container.Common;
-using Osmo.Dominocode;
-using Osmo.SDK.VisionPlatformModule;
 
 namespace Byjus.VisionTest {
-    public class VisionTestMainParent : OsmoGameBase, IOsmoVisionHelper, IOsmoEditorVisionHelper {
-        [SerializeField] TangibleManager mManager;
-        [SerializeField] GameManagerView gameManager;
-        [SerializeField] VisionTestInputParser inputParser;
-        [SerializeField] OsmoVisionServiceView osmoVisionServiceView;
+    public class VisionTestMainParent : OsmoGameBase, IOsmoEditorVisionHelper {
+        public TangibleManager mManager;
+        public OsmoVisionServiceView osmoVisionServiceView;
+        public HierarchyManager hierarchyManager;
 
         public TangibleManager tangibleManager { get { return mManager; } }
 
@@ -25,37 +22,20 @@ namespace Byjus.VisionTest {
                 Bridge.Helper.SetVisionActive(true);
                 Bridge.Helper.SetOsmoWorldStickersAllowed(true);
 
-                Factory.Init(osmoVisionServiceView, this);
-                gameManager.Init();
-                inputParser.Init();
+#if UNITY_EDITOR
+                Factory.Init(this);
+#else
+                Factory.Init(osmoVisionServiceView);
+#endif
+                hierarchyManager.Setup();
 
             } else {
                 Debug.LogWarning("[VisionTest] You are running without the Osmo bridge. No Osmo services will be loaded. Bridge.Helper will be null");
             }
         }
 
-        private void OnEnable() {
-            mManager.OnObjectEnter += OnVisionObjectEnter;
-            mManager.OnObjectExit += OnVisionObjectExit;
-        }
-
         void OnSettingsButtonClicked() {
             Debug.LogWarning("Settings Clicked");
-        }
-
-        void OnVisionObjectEnter(TangibleObject obj) {
-            var config = (DominocodeIdConfig) mManager.deck_.IdConfig;
-
-        }
-
-        void OnVisionObjectExit(TangibleObject obj) {
-        }
-
-        private void Update() {
-            if (!gameReady_) {
-                return;
-            }
-
         }
     }
 
@@ -73,14 +53,14 @@ namespace Byjus.VisionTest {
             this.visionHelper = visionHelper;
         }
 
-        public List<VisionTestExtInput> GetVisionObjects() {
+        public List<ExtInput> GetVisionObjects() {
             var aliveObjs = visionHelper.tangibleManager.AliveObjects;
-            var ret = new List<VisionTestExtInput>();
+            var ret = new List<ExtInput>();
             foreach (var obj in aliveObjs) {
                 if (obj.Id < 10) {
-                    ret.Add(new VisionTestExtInput { id = obj.Id, type = VisionTestExtInput.TileType.BLUE_ROD });
+                    ret.Add(new ExtInput { id = obj.Id, type = ExtInput.TileType.BLUE_ROD });
                 } else {
-                    ret.Add(new VisionTestExtInput { id = obj.Id, type = VisionTestExtInput.TileType.RED_CUBE });
+                    ret.Add(new ExtInput { id = obj.Id, type = ExtInput.TileType.RED_CUBE });
                 }
             }
             return ret;

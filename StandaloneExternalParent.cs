@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if CC_STANDALONE
 namespace Byjus.VisionTest {
     public class StandaloneExternalParent : MonoBehaviour {
-        public GameManagerView gameManager;
-        public VisionTestInputParser inputParser;
+        public HierarchyManager hierarchyManager;
 
         private void Start() {
             Factory.Init();
-            inputParser.Init();
+            hierarchyManager.Setup();
         }
     }
 }
+#endif

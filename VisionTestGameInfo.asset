@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DummyData: '?'
   Value:
-    GamePath: Assets/Games/container-tester-games/VisionTest
+    GamePath: Assets/Games/container-tester-games/RncElevator
     UsesLocalization: 0
     GameID: VisionTest
     SectionID: samplegame

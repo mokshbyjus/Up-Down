@@ -301,6 +301,8 @@ GameObject:
   m_Component:
   - component: {fileID: 233337674}
   - component: {fileID: 233337675}
+  - component: {fileID: 233337676}
+  - component: {fileID: 233337673}
   m_Layer: 0
   m_Name: MainParent
   m_TagString: Untagged
@@ -308,6 +310,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &233337673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233337672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2f9d3f1b3a14980a784a9bc501eb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputParser: {fileID: 1377432637}
+  gameManager: {fileID: 1957267774}
+  wizard: {fileID: 1048193400}
 --- !u!4 &233337674
 Transform:
   m_ObjectHideFlags: 0
@@ -335,12 +352,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 233337672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1f654ac0ba046809d6b097c8134cad, type: 3}
+  m_Script: {fileID: 11500000, guid: 27635340fc2d54ec9b8f9ab68858499c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputParser: {fileID: 1377432637}
-  gameManager: {fileID: 1957267774}
-  wizard: {fileID: 1048193400}
+  <Bridge>k__BackingField: {fileID: 0}
+  gameReady_: 0
+  savedSleepTimeout_: 0
+  mManager: {fileID: 759177799}
+  osmoVisionServiceView: {fileID: 401863912}
+  hierarchyManager: {fileID: 233337673}
+--- !u!114 &233337676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233337672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282591e90a7ea4446b4f1750abb43aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hierarchyManager: {fileID: 233337673}
 --- !u!1 &320093749
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8ac9be80efe4fe3ab275af3986c53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastJson: 
 --- !u!1 &759177794
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c3255708dc14017a91fa9fd0f9d43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPersistenceTime_: 0.5
+  maxPersistenceFrames_: 4
 --- !u!114 &759177798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +556,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fd03622d60847e8a7d9f987713141a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  apiKey_: 00000000-0000-0000-0000-000000000000
+  deck_: {fileID: 11400000, guid: 6b54f89e4ae084e49808b9b36cdb8c55, type: 2}
+  customFiltering_: 0
+  registerDeckOnStartup_: 1
+  visionParserService_: {fileID: 759177795}
+  clusterService_: {fileID: 0}
+  objectMatcher_: {fileID: 759177798}
+  objectPersister_: {fileID: 759177797}
 --- !u!114 &759177800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +588,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79991fde551747368c8d454652c7fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onScreenDrawerTouchCountToggle_: 3
+  allowOnDevice_: 0
+  onScreenZ_: -512
+  kBuffer: 10
+  onScreenDrawerKeyToggle_: 120
+  rotateLeft_: 276
+  rotateRight_: 275
+  playButton_: 32
+  dirUp_: 273
+  dirDown_: 274
+  dirRight_: 275
+  dirLeft_: 276
 --- !u!4 &759177802
 Transform:
   m_ObjectHideFlags: 0
@@ -758,6 +814,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa17383bf76ab433cb202f79dd43da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSettingsButtonClick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameUnload:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerStates: []
 --- !u!4 &1296694477
 Transform:
   m_ObjectHideFlags: 0
