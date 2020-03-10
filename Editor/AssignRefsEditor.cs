@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using Byjus.VisionTest.Externals;
+using Byjus.VisionTest.Verticals;
 
 #if !CC_STANDALONE
 using Osmo.SDK;
