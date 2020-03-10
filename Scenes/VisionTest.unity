@@ -300,7 +300,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 233337674}
-  - component: {fileID: 233337673}
   - component: {fileID: 233337675}
   m_Layer: 0
   m_Name: MainParent
@@ -309,18 +308,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &233337673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233337672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27635340fc2d54ec9b8f9ab68858499c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &233337674
 Transform:
   m_ObjectHideFlags: 0
@@ -348,11 +335,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 233337672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282591e90a7ea4446b4f1750abb43aef, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e1f654ac0ba046809d6b097c8134cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1957267774}
   inputParser: {fileID: 1377432637}
+  gameManager: {fileID: 1957267774}
+  wizard: {fileID: 1048193400}
 --- !u!1 &320093749
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048193399}
   - component: {fileID: 1048193398}
+  - component: {fileID: 1048193400}
   m_Layer: 0
   m_Name: wizard
   m_TagString: Untagged
@@ -649,6 +638,18 @@ Transform:
   m_Father: {fileID: 1957267775}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1048193400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048193397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84fe8a1f8e544316bd04c7d79078107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1076957607
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a20bac7ee9f4642bc83075914d902e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1957267774}
 --- !u!1 &1948101109
 GameObject:
   m_ObjectHideFlags: 0

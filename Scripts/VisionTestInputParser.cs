@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Byjus.VisionTest {
     public class VisionTestInputParser : MonoBehaviour {
-        [SerializeField] GameManagerView gameManager;
+        public IExtInputListener inputListener;
 
         IVisionService visionService;
 
@@ -23,7 +23,7 @@ namespace Byjus.VisionTest {
         IEnumerator ListenForInput() {
             yield return new WaitForSeconds(3f);
 
-            gameManager.ExtInputStart();
+            inputListener.ExtInputStart();
 
             var str = "Input count: " + inputCount + "\n";
 
@@ -38,10 +38,10 @@ namespace Byjus.VisionTest {
                 str += "Old: " + old + "\n";
                 if (old.type == ExtInput.TileType.BLUE_ROD) {
                     str += "Removing blue\n";
-                    gameManager.OnBlueRodRemoved();
+                    inputListener.OnBlueRodRemoved();
                 } else {
                     str += "Removing red\n";
-                    gameManager.OnRedCubeRemoved();
+                    inputListener.OnRedCubeRemoved();
                 }
             }
 
@@ -49,10 +49,10 @@ namespace Byjus.VisionTest {
                 str += "New: " + newO + "\n";
                 if (newO.type == ExtInput.TileType.BLUE_ROD) {
                     str += "Adding blue\n";
-                    gameManager.OnBlueRodAdded();
+                    inputListener.OnBlueRodAdded();
                 } else {
                     str += "Adding red\n";
-                    gameManager.OnRedCubeAdded();
+                    inputListener.OnRedCubeAdded();
                 }
             }
 
@@ -62,7 +62,7 @@ namespace Byjus.VisionTest {
             currentObjects.Clear();
             currentObjects.AddRange(visionObjects);
 
-            gameManager.ExtInputEnd();
+            inputListener.ExtInputEnd();
 
             StartCoroutine(ListenForInput());
         }
@@ -97,6 +97,15 @@ namespace Byjus.VisionTest {
                 j++;
             }
         }
+    }
+
+    public interface IExtInputListener {
+        void ExtInputStart();
+        void ExtInputEnd();
+        void OnBlueRodAdded();
+        void OnBlueRodRemoved();
+        void OnRedCubeAdded();
+        void OnRedCubeRemoved();
     }
 
 }

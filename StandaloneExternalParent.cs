@@ -9,7 +9,6 @@ namespace Byjus.VisionTest {
 
         private void Start() {
             Factory.Init();
-            gameManager.Init();
             inputParser.Init();
         }
     }
