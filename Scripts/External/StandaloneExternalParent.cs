@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Byjus.VisionTest.Verticals;
 using UnityEngine;
 
 #if CC_STANDALONE
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Externals {
     public class StandaloneExternalParent : MonoBehaviour {
         public HierarchyManager hierarchyManager;
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using Byjus.VisionTest.Externals;
 
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Verticals {
     public class Factory {
         static IVisionService visionService;
 

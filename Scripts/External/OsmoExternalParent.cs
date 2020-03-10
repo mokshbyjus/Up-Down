@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Byjus.VisionTest.Verticals;
 
 #if !CC_STANDALONE
 using Osmo.SDK;
 using Osmo.Container.Common;
 
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Externals {
     public class VisionTestMainParent : OsmoGameBase, IOsmoEditorVisionHelper {
         public TangibleManager mManager;
         public OsmoVisionServiceView osmoVisionServiceView;

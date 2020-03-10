@@ -7,7 +7,7 @@ using Osmo.SDK;
 using Osmo.SDK.VisionPlatformModule;
 using Osmo.SDK.Vision;
 
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Verticals {
     public class OsmoVisionServiceView : MonoBehaviour, IVisionService {
         string lastJson;
 

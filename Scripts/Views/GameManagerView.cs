@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Byjus.VisionTest.Ctrls;
 
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Views {
 
     public class GameManagerView : MonoBehaviour, IGameManagerView {
         [SerializeField] GameObject blueRodPrefab;

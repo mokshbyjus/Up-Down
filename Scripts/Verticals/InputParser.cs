@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Byjus.VisionTest {
-    public class VisionTestInputParser : MonoBehaviour {
+namespace Byjus.VisionTest.Verticals {
+    public class InputParser : MonoBehaviour {
         public IExtInputListener inputListener;
 
         IVisionService visionService;

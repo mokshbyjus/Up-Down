@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Verticals {
     public interface IVisionService {
         void Init();
         List<ExtInput> GetVisionObjects();

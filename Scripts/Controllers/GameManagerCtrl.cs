@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
+using Byjus.VisionTest.Views;
+using Byjus.VisionTest.Verticals;
 
-namespace Byjus.VisionTest {
-
-    public interface IGameManagerCtrl {
-        void Init();
-        void LiftMoveDone();
-    }
-
+namespace Byjus.VisionTest.Ctrls {
     public class GameManagerCtrl : IGameManagerCtrl, IExtInputListener, IWizardParent {
         public IGameManagerView view;
         public IWizardCtrl wizardCtrl;
@@ -69,6 +65,11 @@ namespace Byjus.VisionTest {
             liftInProgress = false;
             SpawnChild();
         }
+    }
+
+    public interface IGameManagerCtrl {
+        void Init();
+        void LiftMoveDone();
     }
 
     public class ExWorldInfo {

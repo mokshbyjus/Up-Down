@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Byjus.VisionTest.Ctrls;
+using Byjus.VisionTest.Views;
+using Byjus.VisionTest.Verticals;
 
 #if !CC_STANDALONE
 using Osmo.SDK;
 #endif
 
-namespace Byjus.VisionTest {
+namespace Byjus.VisionTest.Externals {
     public class HierarchyManager : MonoBehaviour {
-        [SerializeField] VisionTestInputParser inputParser;
+        [SerializeField] InputParser inputParser;
         [SerializeField] GameManagerView gameManager;
         [SerializeField] WizardView wizard;
 
