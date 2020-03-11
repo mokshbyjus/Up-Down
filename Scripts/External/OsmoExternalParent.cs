@@ -8,12 +8,18 @@ using Osmo.SDK;
 using Osmo.Container.Common;
 
 namespace Byjus.VisionTest.Externals {
-    public class VisionTestMainParent : OsmoGameBase, IOsmoEditorVisionHelper {
-        public TangibleManager mManager;
-        public OsmoVisionServiceView osmoVisionServiceView;
-        public HierarchyManager hierarchyManager;
+    public class OsmoExternalParent : OsmoGameBase, IOsmoEditorVisionHelper {
+        [SerializeField] TangibleManager mManager;
+        [SerializeField] OsmoVisionService osmoVisionServiceView;
+        [SerializeField] HierarchyManager hierarchyManager;
 
         public TangibleManager tangibleManager { get { return mManager; } }
+
+        void AssignRefs() {
+            mManager = FindObjectOfType<TangibleManager>();
+            osmoVisionServiceView = FindObjectOfType<OsmoVisionService>();
+            hierarchyManager = FindObjectOfType<HierarchyManager>();
+        }
 
         protected override void GameStart() {
             if (Bridge != null) {
@@ -22,6 +28,8 @@ namespace Byjus.VisionTest.Externals {
                 Bridge.Helper.SetSettingsButtonVisibility(true);
                 Bridge.Helper.SetVisionActive(true);
                 Bridge.Helper.SetOsmoWorldStickersAllowed(true);
+
+                AssignRefs();
 
 #if UNITY_EDITOR
                 Factory.Init(this);

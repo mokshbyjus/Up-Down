@@ -3,10 +3,6 @@ using Byjus.VisionTest.Ctrls;
 using Byjus.VisionTest.Views;
 using Byjus.VisionTest.Verticals;
 
-#if !CC_STANDALONE
-using Osmo.SDK;
-#endif
-
 namespace Byjus.VisionTest.Externals {
     public class HierarchyManager : MonoBehaviour {
         [SerializeField] InputParser inputParser;
