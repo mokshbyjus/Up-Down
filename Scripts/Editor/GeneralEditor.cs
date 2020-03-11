@@ -6,20 +6,14 @@ using Byjus.VisionTest.Util;
 using System.IO;
 
 namespace Byjus.VisionTest.EditorScripts {
-    [CustomEditor(typeof(GeneralHelper))]
     public class GeneralEditor : Editor {
 
         [MenuItem("RnC/Assign References")]
         public static void AssignRefs() {
-#if CC_STANDALONE
-            var fileName = Constants.STANDALONE_SCRIPTS_REF_FILE_NAME;
-#else
-            var fileName = Constants.OSMO_SCRIPTS_REF_FILE_NAME;
-#endif
-
+            var fileName = Constants.SCRIPTS_REF_FILE_NAME;
             var fileContents = File.ReadAllText(fileName);
             Debug.LogError("Writing it to scripts location");
-            File.WriteAllText(Constants.SCRIPTS_ASSEMBLY_DEFINITION_PATH, fileContents);
+            File.WriteAllText(Constants.SCRIPTS_ASSEMBLY_DEF_OUTPUT_PATH, fileContents);
             Debug.LogError("Writing to scripts done");
         }
     }
