@@ -144,6 +144,7 @@ RectTransform:
   m_Children:
   - {fileID: 1971142243}
   - {fileID: 1989479614}
+  - {fileID: 1850245831}
   m_Father: {fileID: 233337674}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -523,8 +524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c3255708dc14017a91fa9fd0f9d43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPersistenceTime_: 0.5
-  maxPersistenceFrames_: 4
 --- !u!114 &759177798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,14 +548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fd03622d60847e8a7d9f987713141a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apiKey_: 00000000-0000-0000-0000-000000000000
-  deck_: {fileID: 11400000, guid: 6b54f89e4ae084e49808b9b36cdb8c55, type: 2}
-  customFiltering_: 0
-  registerDeckOnStartup_: 1
-  visionParserService_: {fileID: 759177795}
-  clusterService_: {fileID: 0}
-  objectMatcher_: {fileID: 759177798}
-  objectPersister_: {fileID: 759177797}
 --- !u!114 &759177800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,18 +572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79991fde551747368c8d454652c7fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onScreenDrawerTouchCountToggle_: 3
-  allowOnDevice_: 0
-  onScreenZ_: -512
-  kBuffer: 10
-  onScreenDrawerKeyToggle_: 120
-  rotateLeft_: 276
-  rotateRight_: 275
-  playButton_: 32
-  dirUp_: 273
-  dirDown_: 274
-  dirRight_: 275
-  dirLeft_: 276
 --- !u!4 &759177802
 Transform:
   m_ObjectHideFlags: 0
@@ -699,6 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84fe8a1f8e544316bd04c7d79078107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wizardText: {fileID: 1850245832}
 --- !u!1 &1076957607
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,13 +787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa17383bf76ab433cb202f79dd43da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnSettingsButtonClick:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGameUnload:
-    m_PersistentCalls:
-      m_Calls: []
-  PlayerStates: []
 --- !u!4 &1296694477
 Transform:
   m_ObjectHideFlags: 0
@@ -871,6 +844,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a20bac7ee9f4642bc83075914d902e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1850245830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1850245831}
+  - component: {fileID: 1850245833}
+  - component: {fileID: 1850245832}
+  m_Layer: 5
+  m_Name: WizardText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1850245831
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850245830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 20383932}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 893, y: -1103}
+  m_SizeDelta: {x: 800, y: 100}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1850245832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850245830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 64
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &1850245833
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850245830}
+  m_CullTransparentMesh: 0
 --- !u!1 &1948101109
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,9 +1039,10 @@ MonoBehaviour:
   lift: {fileID: 1076957607}
   childPrefab: {fileID: 8465607286684112329, guid: 0f72962a9775d44a1a57d0965a8ed03b,
     type: 3}
-  wizard: {fileID: 1048193397}
   infoText: {fileID: 1971142244}
   childText: {fileID: 1989479612}
+  blueRodsParentPos: {x: -3, y: 2}
+  redCubesParentStartY: 4.5
 --- !u!4 &1957267775
 Transform:
   m_ObjectHideFlags: 0
@@ -1159,6 +1210,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 87, y: -1754}
+  m_AnchoredPosition: {x: 230, y: -1760}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0, y: 1}

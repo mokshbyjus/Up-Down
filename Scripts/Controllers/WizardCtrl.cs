@@ -9,12 +9,17 @@ namespace Byjus.VisionTest.Ctrls {
         public IWizardView view;
 
         public void Init() {
+            
+        }
 
+        public void ToggleInput(bool enable) {
+            view.ShowText(enable ? "READY" : "STOP");
         }
     }
 
     public interface IWizardCtrl {
         void Init();
+        void ToggleInput(bool enable);
     }
 
     public interface IWizardParent {

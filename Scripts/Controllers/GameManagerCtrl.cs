@@ -14,8 +14,8 @@ namespace Byjus.VisionTest.Ctrls {
         public void Init() {
             wizardCtrl.Init();
 
+            wizardCtrl.ToggleInput(true);
             this.worldInfo = new ExWorldInfo();
-
             SpawnChild();
         }
 
@@ -56,6 +56,7 @@ namespace Byjus.VisionTest.Ctrls {
 
         void StartLift() {
             liftInProgress = true;
+            wizardCtrl.ToggleInput(false);
             if (worldInfo.FinalCount == childLiftReqt) {
                 view.StartLift(worldInfo.FinalCount);
             }
@@ -63,6 +64,7 @@ namespace Byjus.VisionTest.Ctrls {
 
         public void LiftMoveDone() {
             liftInProgress = false;
+            wizardCtrl.ToggleInput(true);
             SpawnChild();
         }
     }

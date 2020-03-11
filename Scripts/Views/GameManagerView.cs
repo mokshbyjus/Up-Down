@@ -10,15 +10,18 @@ namespace Byjus.VisionTest.Views {
         [SerializeField] GameObject redCubePrefab;
         [SerializeField] GameObject lift;
         [SerializeField] GameObject childPrefab;
-        [SerializeField] GameObject wizard;
         [SerializeField] Text infoText;
         [SerializeField] Text childText;
+        [SerializeField] Vector2 blueRodsParentPos;
+        [SerializeField] float redCubesParentStartY;
 
         public IGameManagerCtrl ctrl;
 
         GameObject blueRodsParent;
         GameObject redCubesParent;
         GameObject child;
+
+        const float SCREEN_TILES_GAP = 0.05f;
 
         public void SpawnChild(int childLiftReqt) {
             if (child != null) {
@@ -34,8 +37,9 @@ namespace Byjus.VisionTest.Views {
                 Destroy(blueRodsParent);
             }
             blueRodsParent = new GameObject("BlueRodsParent");
+            blueRodsParent.transform.position = blueRodsParentPos;
             for (int i = 0; i < numBlueRods; i++) {
-                var pos = blueRodsParent.transform.position + new Vector3(i * 1, 0);
+                var pos = blueRodsParent.transform.position + new Vector3(i * (1 + SCREEN_TILES_GAP), 0);
                 Instantiate(blueRodPrefab, pos, Quaternion.identity, blueRodsParent.transform);
             }
 
@@ -43,9 +47,9 @@ namespace Byjus.VisionTest.Views {
                 Destroy(redCubesParent);
             }
             redCubesParent = new GameObject("RedCubesParent");
-            redCubesParent.transform.position = blueRodsParent.transform.position + new Vector3(numBlueRods * 1, 0);
+            redCubesParent.transform.position = blueRodsParent.transform.position + new Vector3(numBlueRods * (1 + SCREEN_TILES_GAP), redCubesParentStartY);
             for (int i = 0; i < numRedCubes; i++) {
-                var pos = redCubesParent.transform.position + new Vector3(i * 1, 0);
+                var pos = redCubesParent.transform.position + new Vector3(0, -i * (1 + SCREEN_TILES_GAP));
                 Instantiate(redCubePrefab, pos, Quaternion.identity, redCubesParent.transform);
             }
         }
