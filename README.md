@@ -2,7 +2,10 @@ Use rods and cubes to power up the elevator and tell it which floor to go to.
 Blue rod (10 blue cubes) are positive floors
 Red cube are negative floors
 
+*********
+
 Architecture Info:
+
 - Osmo services have two variants Osmo*** and Standalone***. Example: OsmoExternalParent and StandaloneExternalParent, OsmoVisionService and StandaloneVisionService
   Depending on the flag CC_STANDALONE, it switches between services.
   
@@ -29,3 +32,19 @@ Architecture Info:
   Great starting resources for writing tests.
   - https://www.raywenderlich.com/9454-introduction-to-unity-unit-testing
   - https://stackoverflow.com/questions/1093020/unit-testing-and-checking-private-variable-value
+
+********
+
+Common setup bugs and solutions
+
+- Project is showing script errors like, Osmo namespace is not present etc. This could be because of assembly definition issues.
+
+  Solution:
+    For testability, there are assembly definitions for scripts which are then linked to the tests assembly definitins
+    For standalone, it works fine. As, the whole code is inside the project.
+    In container, there will be other code which needs to be linked with this assembly definition like the SDK and all.
+    The assembly definition is nothing but JSON, and the correct ones for respective container is placed in Files/ folder.
+    So, just copy the respective file from Files/ and paste contents inside Scripts.asmdef
+
+    Note: The scene might get updated as you may have switched from Osmo to Standalone or vice-versa. In those cases, don't push scene changes.
+          Same goes for Scripts.asmdef changes.
