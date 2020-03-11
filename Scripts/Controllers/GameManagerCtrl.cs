@@ -8,7 +8,7 @@ namespace Byjus.VisionTest.Ctrls {
         public IWizardCtrl wizardCtrl;
 
         ExWorldInfo worldInfo;
-        int childLiftReqt;
+        public int childLiftReqt;
         bool liftInProgress;
 
         public void Init() {
