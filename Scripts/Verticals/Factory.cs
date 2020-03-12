@@ -13,7 +13,7 @@ namespace Byjus.VisionTest.Verticals {
         public static void Init(IOsmoEditorVisionHelper editorVisionHelper) {
             visionService = new OsmoEditorVisionService(editorVisionHelper);
 #else
-        public static void Init(OsmoVisionServiceView visionServiceView) {
+        public static void Init(OsmoVisionService visionServiceView) {
             visionService = visionServiceView;
 #endif
             visionService.Init();
