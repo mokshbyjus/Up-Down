@@ -4,6 +4,18 @@ Red cube are negative floors
 
 *********
 
+Switching between Standalone and Osmo
+
+Use the player settings flag CC_STANDALONE to switch to Standalone. In standalone, the project can be run separately i.e. outside Osmo.
+
+The main thing which changes is the assembly definition (Scripts.asmdef) file between the two modes. I'm not able to find a way to do it automatically on switch of build flag.
+
+There will be an error in standalone mode saying reference missing in assembly definition. In that case, just remove the references (only in standalone mode). In Osmo mode, the references will be present.
+
+In case, still there is an issue, there are files in Files/ folder which correspond to the correct json for the two modes. You can copy paste the corresponding file contents in Scripts.asmdef, and it should work after that.
+
+*********
+
 Architecture Info:
 
 - Osmo services have two variants Osmo*** and Standalone***. Example: OsmoExternalParent and StandaloneExternalParent, OsmoVisionService and StandaloneVisionService
@@ -32,19 +44,3 @@ Architecture Info:
   Great starting resources for writing tests.
   - https://www.raywenderlich.com/9454-introduction-to-unity-unit-testing
   - https://stackoverflow.com/questions/1093020/unit-testing-and-checking-private-variable-value
-
-********
-
-Common setup bugs and solutions
-
-- Project is showing script errors like, Osmo namespace is not present etc. This could be because of assembly definition issues.
-
-  Solution:
-    For testability, there are assembly definitions for scripts which are then linked to the tests assembly definitins
-    For standalone, it works fine. As, the whole code is inside the project.
-    In container, there will be other code which needs to be linked with this assembly definition like the SDK and all.
-    The assembly definition is nothing but JSON, and the correct ones for respective container is placed in Files/ folder.
-    So, just copy the respective file from Files/ and paste contents inside Scripts.asmdef
-
-    Note: The scene might get updated as you may have switched from Osmo to Standalone or vice-versa. In those cases, don't push scene changes.
-          Same goes for Scripts.asmdef changes.
