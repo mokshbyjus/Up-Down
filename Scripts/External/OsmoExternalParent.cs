@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Byjus.VisionTest.Verticals;
 
-#if !CC_STANDALONE
+// #if !CC_STANDALONE
 using Osmo.SDK;
 using Osmo.Container.Common;
 
@@ -80,4 +80,4 @@ namespace Byjus.VisionTest.Externals {
         }
     }
 }
-#endif
+// #endif

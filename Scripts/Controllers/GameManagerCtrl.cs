@@ -1,22 +1,24 @@
-﻿using UnityEngine;
+﻿using Byjus.VisionTest.Verticals;
 using Byjus.VisionTest.Views;
-using Byjus.VisionTest.Verticals;
+using UnityEngine;
 
 namespace Byjus.VisionTest.Ctrls {
-    public class GameManagerCtrl : IGameManagerCtrl, IExtInputListener, IWizardParent {
+    public class GameManagerCtrl : MonoBehaviour, IGameManagerCtrl, IExtInputListener, IWizardParent {
         public IGameManagerView view;
         public IWizardCtrl wizardCtrl;
+        [SerializeField] private LiftController liftController = new LiftController();
 
         ExWorldInfo worldInfo;
         public int childLiftReqt;
         bool liftInProgress;
+        private int prevValue = 0;
 
         public void Init() {
             wizardCtrl.Init();
 
             wizardCtrl.ToggleInput(true);
             this.worldInfo = new ExWorldInfo();
-            SpawnChild();
+            // SpawnChild();
         }
 
         void SpawnChild() {
@@ -33,9 +35,20 @@ namespace Byjus.VisionTest.Ctrls {
         public void ExtInputEnd() {
             view.UpdateRodsAndCubes(worldInfo.NumBlueRods, worldInfo.NumRedCubes);
             view.UpdateInfo(worldInfo.FinalCount);
-            if (worldInfo.FinalCount == childLiftReqt && !liftInProgress) {
-                StartLift();
+            if (liftController == null) {
+                Debug.Log("null");
+                liftController = FindObjectOfType<LiftController>();
             }
+            if (liftController != null) {
+                Debug.Log("Not null");
+                if (prevValue != worldInfo.FinalCount && worldInfo.FinalCount <= 10 && worldInfo.FinalCount > -1) {
+                    prevValue = worldInfo.FinalCount;
+                    liftController.AddFloorToQueue(worldInfo.FinalCount);
+                }
+            }
+
+            //Update Queue
+            // StartLift();
         }
 
         public void OnBlueRodAdded() {
@@ -57,9 +70,7 @@ namespace Byjus.VisionTest.Ctrls {
         void StartLift() {
             liftInProgress = true;
             wizardCtrl.ToggleInput(false);
-            if (worldInfo.FinalCount == childLiftReqt) {
-                view.StartLift(worldInfo.FinalCount);
-            }
+            // view.StartLift(worldInfo.FinalCount);
         }
 
         public void LiftMoveDone() {

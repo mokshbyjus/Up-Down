@@ -8,7 +8,7 @@ namespace Byjus.VisionTest.Views {
         public IWizardCtrl ctrl;
 
         public void ShowText(string text) {
-            wizardText.text = text;
+            // wizardText.text = text;
         }
     }
 

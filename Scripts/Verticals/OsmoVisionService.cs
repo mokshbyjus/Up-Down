@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-#if !CC_STANDALONE
+// #if !CC_STANDALONE
 using Osmo.SDK;
 using Osmo.SDK.VisionPlatformModule;
 using Osmo.SDK.Vision;
@@ -73,4 +73,4 @@ namespace Byjus.VisionTest.Verticals {
         public int id;
     }
 }
-#endif
+// #endif
