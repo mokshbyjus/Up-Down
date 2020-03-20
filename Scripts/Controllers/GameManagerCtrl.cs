@@ -3,9 +3,9 @@ using Byjus.VisionTest.Views;
 using UnityEngine;
 
 namespace Byjus.VisionTest.Ctrls {
-    public class GameManagerCtrl : MonoBehaviour, IGameManagerCtrl, IExtInputListener, IWizardParent {
+    public class GameManagerCtrl : MonoBehaviour, IGameManagerCtrl, IExtInputListener {
         public IGameManagerView view;
-        public IWizardCtrl wizardCtrl;
+        // public IWizardCtrl wizardCtrl;
         [SerializeField] private LiftController liftController = new LiftController();
 
         ExWorldInfo worldInfo;
@@ -14,9 +14,9 @@ namespace Byjus.VisionTest.Ctrls {
         private int prevValue = 0;
 
         public void Init() {
-            wizardCtrl.Init();
+            // wizardCtrl.Init();
 
-            wizardCtrl.ToggleInput(true);
+            // wizardCtrl.ToggleInput(true);
             this.worldInfo = new ExWorldInfo();
             // SpawnChild();
         }
@@ -69,13 +69,13 @@ namespace Byjus.VisionTest.Ctrls {
 
         void StartLift() {
             liftInProgress = true;
-            wizardCtrl.ToggleInput(false);
+            // wizardCtrl.ToggleInput(false);
             // view.StartLift(worldInfo.FinalCount);
         }
 
         public void LiftMoveDone() {
             liftInProgress = false;
-            wizardCtrl.ToggleInput(true);
+            // wizardCtrl.ToggleInput(true);
             SpawnChild();
         }
     }

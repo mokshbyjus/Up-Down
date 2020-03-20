@@ -11,18 +11,18 @@ namespace Byjus.VisionTest.Tests {
     public class GameTestSuite {
         GameManagerCtrl gameCtrl;
         IExtInputListener inputListener;
-        TestWizard testWizard;
+        // TestWizard testWizard;
         TestGameView testView;
 
         [SetUp]
         public void Setup() {
             gameCtrl = new GameManagerCtrl();
-            testWizard = new TestWizard();
+            // testWizard = new TestWizard();
             testView = new TestGameView();
 
             inputListener = gameCtrl;
             gameCtrl.view = testView;
-            gameCtrl.wizardCtrl = testWizard;
+            // gameCtrl.wizardCtrl = testWizard;
 
             gameCtrl.Init();
         }
@@ -72,13 +72,13 @@ namespace Byjus.VisionTest.Tests {
         }
     }
 
-    class TestWizard : IWizardCtrl {
-        public void Init() {
-            Debug.Log("Wizard: Init");
-        }
+    // class TestWizard : IWizardCtrl {
+    //     public void Init() {
+    //         Debug.Log("Wizard: Init");
+    //     }
 
-        public void ToggleInput(bool enable) {
-            Debug.Log("Wizard: Toggle Input: " + enable);
-        }
-    }
+    //     public void ToggleInput(bool enable) {
+    //         Debug.Log("Wizard: Toggle Input: " + enable);
+    //     }
+    // }
 }
