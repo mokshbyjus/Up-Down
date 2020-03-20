@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MonsterController : MonoBehaviour {
     [SerializeField] private List<List<Transform>> monsterSpawnPosList = null;
+    [SerializeField] private List<MonsterInfo> monsterInfos;
     [SerializeField] private GameObject monsterPrefab;
     [SerializeField] private float monsterSpeed;
     public void SpawnMonster(int floor, Side side) {
@@ -19,4 +21,9 @@ public class MonsterController : MonoBehaviour {
 public enum Side {
     LEFT,
     RIGHT
+}
+
+[Serializable]
+public class MonsterInfo {
+    public List<GameObject> monsterGo;
 }
