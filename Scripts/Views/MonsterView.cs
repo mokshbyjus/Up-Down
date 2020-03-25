@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterView : MonoBehaviour {
-    private MonsterController monsterController;
+    public MonsterController monsterController;
     private Rigidbody2D monsterRb;
     private Coroutine moveCr;
-    private MonsterModel myModel;
+    public MonsterModel myModel;
 
     private void Start() {
-        StartMoving();
+        // StartMoving();
         monsterRb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.K)) {
+            TakeOneStep();
+        }
     }
 
     public void Init(MonsterController monsterController, MonsterModel monsterModel) {
@@ -23,11 +29,20 @@ public class MonsterView : MonoBehaviour {
         // float distance = Vector3.Distance(transform.position, position);
         // float time = distance / speed;
         if (myModel.spawnSide == Side.LEFT) {
-            moveCr = StartCoroutine(MoveCoroutine(myModel.speed));
+            moveCr = StartCoroutine(MoveCoroutine(monsterController.monsterSpeed));
         } else {
-            moveCr = StartCoroutine(MoveCoroutine(-myModel.speed));
+            moveCr = StartCoroutine(MoveCoroutine(-monsterController.monsterSpeed));
         }
 
+    }
+
+    public void TakeOneStep() {
+        if (myModel.spawnSide == Side.LEFT) {
+            monsterRb.AddForce(monsterRb.transform.right * monsterController.monsterSpeed, ForceMode2D.Impulse);
+        } else {
+            // moveCr = StartCoroutine(MoveCoroutine(-monsterController.monsterSpeed));
+            monsterRb.AddForce(monsterRb.transform.right * -monsterController.monsterSpeed, ForceMode2D.Impulse);
+        }
     }
 
     private IEnumerator MoveCoroutine(float speed) {
@@ -38,6 +53,20 @@ public class MonsterView : MonoBehaviour {
             }
             monsterRb.velocity = Vector2.right * speed;
             yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Floor") {
+            monsterRb.velocity = Vector2.zero;
+            monsterController.OnFall(myModel, gameObject);
+            // StopCoroutine(moveCr);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "FireBall") {
+            Destroy(gameObject);
         }
     }
 }

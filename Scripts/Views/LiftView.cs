@@ -11,10 +11,10 @@ public class LiftView : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            MoveLiftTo(testFloor);
-        }
+        // if(Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     MoveLiftTo(testFloor);
+        // }
     }
     public void MoveLiftTo(Transform toPos) {
         liftTransform.DOMove(toPos.position, timePerFloor)
