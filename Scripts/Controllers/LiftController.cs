@@ -81,6 +81,7 @@ public class LiftController : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         wizardController.OnLiftMoveComplete(liftModel.currentLevel);
         yield return new WaitForSeconds(0.5f);
+        wizardController.IdlePosition();
         OnLiftMoveComplete();
     }
 
