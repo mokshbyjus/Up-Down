@@ -1665,6 +1665,7 @@ MonoBehaviour:
   - {fileID: 1647155059}
   - {fileID: 578918362}
   liftView: {fileID: 335378841}
+  isLiftMoving: 0
 --- !u!1 &759177794
 GameObject:
   m_ObjectHideFlags: 0
@@ -4407,8 +4408,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948101109}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.29424, y: 0.8634558, z: -14.059}
-  m_LocalScale: {x: 1.715198, y: 2.8118, z: 1.4059}
+  m_LocalPosition: {x: -0.1, y: -7.1, z: -14.05}
+  m_LocalScale: {x: 0.857599, y: 1.4059, z: 1.4059}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -4426,10 +4427,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1076957609}
+  liftController: {fileID: 741328883}
   offsetTravelTime: 0.1
   upOffset: 1
   downOffset: 1
   cameraEase: 0
+  effectThreshold: 0
   dir: 1
 --- !u!1 &1957267773
 GameObject:

@@ -103,7 +103,7 @@ public class LiftController : MonoBehaviour {
         if (to > liftModel.currentLevel) {
             liftDir = 1;
         }
-        cameraView.StartCamera(liftDir);
+        cameraView.StartCamera(liftDir,to - liftModel.currentLevel * liftDir);
         float distance = Vector3.Distance(liftView.liftTransform.position, levelsPositionsList[to].position);
         float time = distance / liftView.liftSpeed;
         liftView.MoveLiftToSmooth(levelsPositionsList[to], time);
