@@ -6,17 +6,19 @@ using UnityEngine;
 public class LiftController : MonoBehaviour {
     [SerializeField] private WizardController wizardController = null;
     [SerializeField] private MonsterController monsterController = null;
+    [SerializeField] private CameraView cameraView = null;
     [SerializeField] private List<Transform> levelsPositionsList;
     [SerializeField] private LiftView liftView;
     [HideInInspector] public LiftModel liftModel = new LiftModel();
     private bool liftIsMoving = false;
     private Coroutine queueChecker = null;
     private Coroutine liftMoveCr = null;
+    [HideInInspector] public bool isLiftMoving = false;
 
     #region --------------------------- Private Methods -------------------------------------
 
     private void Start() {
-        queueChecker = StartCoroutine(QueueChecker());
+        // queueChecker = StartCoroutine(QueueChecker());
         liftModel.currentLevel = 0;
         // liftModel.Enqueue(0);
         // liftModel.Enqueue(4);
@@ -42,7 +44,13 @@ public class LiftController : MonoBehaviour {
             AddFloorToQueue(3);
             AddFloorToQueue(2);
             AddFloorToQueue(7);
-            AddFloorToQueue(1);
+            AddFloorToQueue(0);
+        }
+
+        if (!isLiftMoving) {
+            if (liftModel.floorsQueue.Count != 0) {
+                MoveLift(liftModel.floorsQueue[0]);
+            }
         }
     }
 
@@ -57,10 +65,14 @@ public class LiftController : MonoBehaviour {
     }
 
     private void MoveLift(int to) {
-        liftMoveCr = StartCoroutine(LiftMovementCoroutine(to));
+        Debug.LogError($"Moving lift to:{to} ");
+
+        // liftMoveCr = StartCoroutine(LiftMovementCoroutineBlocky(to));
+        liftMoveCr = StartCoroutine(LiftMovementCoroutineSmooth(to));
     }
 
-    private IEnumerator LiftMovementCoroutine(int to) {
+    private IEnumerator LiftMovementCoroutineBlocky(int to) {
+        isLiftMoving = true;
         int liftDir = -1;
         if (to > liftModel.currentLevel) {
             liftDir = 1;
@@ -85,7 +97,28 @@ public class LiftController : MonoBehaviour {
         OnLiftMoveComplete();
     }
 
+    private IEnumerator LiftMovementCoroutineSmooth(int to) {
+        isLiftMoving = true;
+        int liftDir = -1;
+        if (to > liftModel.currentLevel) {
+            liftDir = 1;
+        }
+        cameraView.StartCamera(liftDir);
+        float distance = Vector3.Distance(liftView.liftTransform.position, levelsPositionsList[to].position);
+        float time = distance / liftView.liftSpeed;
+        liftView.MoveLiftToSmooth(levelsPositionsList[to], time);
+        yield return new WaitForSeconds(time);
+        UpdateCurrentFloor(to);
+        monsterController.OnLiftMoveComplete();
+        yield return new WaitForSeconds(0.5f); //Monsters Move before wizard shoots.
+        wizardController.OnLiftMoveComplete(liftModel.currentLevel);
+        yield return new WaitForSeconds(0.5f);
+        wizardController.IdlePosition();
+        OnLiftMoveComplete();
+    }
+
     private IEnumerator QueueChecker() {
+        Debug.LogError("QueueCheke Startedr");
         while (liftMoveCr == null) {
             if (liftModel.floorsQueue.Count != 0) {
                 MoveLift(liftModel.floorsQueue[0]);
@@ -93,6 +126,7 @@ public class LiftController : MonoBehaviour {
             }
             yield return new WaitForEndOfFrame();
         }
+        Debug.LogError("QueueCheke Enderd");
     }
 
     #endregion ------------------------------------------------------------------------------
@@ -114,12 +148,15 @@ public class LiftController : MonoBehaviour {
     }
 
     public void OnLiftMoveComplete() {
+        cameraView.EndCamera();
+        isLiftMoving = false;
         Dequeue();
         if (liftModel.floorsQueue.Count != 0) {
             MoveLift(liftModel.floorsQueue[0]);
-        } else {
-            StartCoroutine(QueueChecker());
         }
+        // } else {
+        //     StartCoroutine(QueueChecker());
+        // }
     }
 
     #endregion ------------------------------------------------------------------------------

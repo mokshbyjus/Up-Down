@@ -43,7 +43,9 @@ namespace Byjus.VisionTest.Ctrls {
                 Debug.Log("Not null");
                 if (prevValue != worldInfo.FinalCount && worldInfo.FinalCount <= 10 && worldInfo.FinalCount > -1) {
                     prevValue = worldInfo.FinalCount;
-                    liftController.AddFloorToQueue(worldInfo.FinalCount);
+                    if (worldInfo.FinalCount > 0) {
+                        liftController.AddFloorToQueue(worldInfo.FinalCount - 1); 
+                    }
                 }
             }
 
