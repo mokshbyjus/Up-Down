@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 public class CameraView : MonoBehaviour {
+    [SerializeField] private float timeToReach = 1f;
     [SerializeField] private Transform playerTransform = null;
     [SerializeField] private LiftController liftController = null;
     [SerializeField] private float offsetTravelTime = 10f;
@@ -36,21 +37,26 @@ public class CameraView : MonoBehaviour {
         }
     }
 
-    public void StartCamera(int direction, int threshold) {
-        if (threshold < effectThreshold) {
-            return;
-        }
-        Vector3 startPoint = cameraTransform.position;
-        Vector3 endPoint = new Vector3();
-        float offset = 0;
-        if (direction == 1) {
-            endPoint = new Vector3(playerTransform.position.x, playerTransform.position.y + upOffset, cameraTransform.position.z);
-            offset = upOffset;
-        } else if (direction == -1) {
-            endPoint = new Vector3(playerTransform.position.x, playerTransform.position.y - downOffset, cameraTransform.position.z);
-            offset = -downOffset;
-        }
-        startCameraCr = StartCoroutine(CameraMovementCoroutine(endPoint, offset));
+    // public void StartCamera(int direction, int threshold) {
+    //     if (threshold < effectThreshold) {
+    //         return;
+    //     }
+    //     Vector3 startPoint = cameraTransform.position;
+    //     Vector3 endPoint = new Vector3();
+    //     float offset = 0;
+    //     if (direction == 1) {
+    //         endPoint = new Vector3(playerTransform.position.x, playerTransform.position.y + upOffset, cameraTransform.position.z);
+    //         offset = upOffset;
+    //     } else if (direction == -1) {
+    //         endPoint = new Vector3(playerTransform.position.x, playerTransform.position.y - downOffset, cameraTransform.position.z);
+    //         offset = -downOffset;
+    //     }
+    //     startCameraCr = StartCoroutine(CameraMovementCoroutine(endPoint, offset));
+    // }
+
+    public void StartCamera(Vector3 toPos) {
+        cameraTransform.DOMove(new Vector3(toPos.x,toPos.y,cameraTransform.position.z), timeToReach)
+            .SetEase(cameraEase);
     }
 
     public void EndCamera(int direction = 0) {

@@ -103,7 +103,7 @@ public class LiftController : MonoBehaviour {
         if (to > liftModel.currentLevel) {
             liftDir = 1;
         }
-        cameraView.StartCamera(liftDir,to - liftModel.currentLevel * liftDir);
+        cameraView.StartCamera(levelsPositionsList[to].position);
         float distance = Vector3.Distance(liftView.liftTransform.position, levelsPositionsList[to].position);
         float time = distance / liftView.liftSpeed;
         liftView.MoveLiftToSmooth(levelsPositionsList[to], time);
@@ -148,7 +148,7 @@ public class LiftController : MonoBehaviour {
     }
 
     public void OnLiftMoveComplete() {
-        cameraView.EndCamera();
+        // cameraView.EndCamera();
         isLiftMoving = false;
         Dequeue();
         if (liftModel.floorsQueue.Count != 0) {

@@ -4426,12 +4426,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4c8c0b99e7e4d3bb7255c36560456a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToReach: 1.2
   playerTransform: {fileID: 1076957609}
   liftController: {fileID: 741328883}
   offsetTravelTime: 0.1
   upOffset: 1
   downOffset: 1
-  cameraEase: 0
+  cameraEase: 3
   effectThreshold: 0
   dir: 1
 --- !u!1 &1957267773
