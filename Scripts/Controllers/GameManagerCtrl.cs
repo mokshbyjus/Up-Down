@@ -1,4 +1,5 @@
-﻿using Byjus.VisionTest.Verticals;
+﻿using System.Collections.Generic;
+using Byjus.VisionTest.Verticals;
 using Byjus.VisionTest.Views;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Byjus.VisionTest.Ctrls {
         // public IWizardCtrl wizardCtrl;
         [SerializeField] private LiftController liftController = new LiftController();
 
-        ExWorldInfo worldInfo;
+        public ExWorldInfo worldInfo;
         public int childLiftReqt;
         bool liftInProgress;
         private int prevValue = 0;
@@ -21,36 +22,23 @@ namespace Byjus.VisionTest.Ctrls {
             // SpawnChild();
         }
 
-        void SpawnChild() {
-            int tensRange = Random.Range(0, 3);
-            int onesRange = Random.Range(6, 9);
-            childLiftReqt = tensRange * 10 + onesRange;
-            view.SpawnChild(childLiftReqt);
-        }
-
-        public void ExtInputStart() {
-
-        }
-
         public void ExtInputEnd() {
             view.UpdateRodsAndCubes(worldInfo.NumBlueRods, worldInfo.NumRedCubes);
             view.UpdateInfo(worldInfo.FinalCount);
             if (liftController == null) {
-                Debug.Log("null");
                 liftController = FindObjectOfType<LiftController>();
             }
             if (liftController != null) {
-                Debug.Log("Not null");
-                if (prevValue != worldInfo.FinalCount && worldInfo.FinalCount <= 10 && worldInfo.FinalCount > -1) {
-                    prevValue = worldInfo.FinalCount;
-                    if (worldInfo.FinalCount > 0) {
-                        liftController.AddFloorToQueue(worldInfo.FinalCount - 1); 
-                    }
+                if (worldInfo.dominos.Count > 0) {
+                    liftController.AddFloorToQueue(worldInfo.dominos[0].id);
                 }
+            } else {
+                liftController.LiftSmash();
             }
+        }
 
-            //Update Queue
-            // StartLift();
+        public void ExtInputStart() {
+
         }
 
         public void OnBlueRodAdded() {
@@ -69,6 +57,12 @@ namespace Byjus.VisionTest.Ctrls {
             worldInfo.RemoveRedCube();
         }
 
+        public void OnDominosUpdate(List<DominosOutput> dominosOutput) {
+            worldInfo.dominos = dominosOutput;
+        }
+
+        // public void
+
         void StartLift() {
             liftInProgress = true;
             // wizardCtrl.ToggleInput(false);
@@ -78,7 +72,7 @@ namespace Byjus.VisionTest.Ctrls {
         public void LiftMoveDone() {
             liftInProgress = false;
             // wizardCtrl.ToggleInput(true);
-            SpawnChild();
+            // SpawnChild();
         }
     }
 
@@ -88,6 +82,7 @@ namespace Byjus.VisionTest.Ctrls {
     }
 
     public class ExWorldInfo {
+        public List<DominosOutput> dominos;
         int numRedCubes;
         int numBlueRods;
 

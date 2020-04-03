@@ -8,13 +8,13 @@ namespace Byjus.VisionTest.Verticals {
 
         IVisionService visionService;
 
-        List<ExtInput> currentObjects;
+        List<DominosOutput> currentObjects;
 
         int inputCount;
 
         public void Init() {
             visionService = Factory.GetVisionService();
-            currentObjects = new List<ExtInput>();
+            currentObjects = new List<DominosOutput>();
             inputCount = 0;
 
             StartCoroutine(ListenForInput());
@@ -29,32 +29,32 @@ namespace Byjus.VisionTest.Verticals {
 
             var visionObjects = visionService.GetVisionObjects();
             visionObjects.Sort((x, y) => x.id - y.id);
-            // compare current ojbects with new Objects
-            // notify GameManager of the input.
+            // // compare current ojbects with new Objects
+            // // notify GameManager of the input.
             
-            Segregate(visionObjects, out List<ExtInput> oldObjects, out List<ExtInput> commonObjects, out List<ExtInput> newObjects);
+            // Segregate(visionObjects, out List<DominosOutput> oldObjects, out List<DominosOutput> commonObjects, out List<DominosOutput> newObjects);
 
-            foreach (var old in oldObjects) {
-                str += "Old: " + old + "\n";
-                if (old.type == ExtInput.TileType.BLUE_ROD) {
-                    str += "Removing blue\n";
-                    inputListener.OnBlueRodRemoved();
-                } else {
-                    str += "Removing red\n";
-                    inputListener.OnRedCubeRemoved();
-                }
-            }
+            // foreach (var old in oldObjects) {
+            //     str += "Old: " + old + "\n";
+            //     if (old.type == DominosOutput.TileType.BLUE_ROD) {
+            //         str += "Removing blue\n";
+            //         inputListener.OnBlueRodRemoved();
+            //     } else {
+            //         str += "Removing red\n";
+            //         inputListener.OnRedCubeRemoved();
+            //     }
+            // }
 
-            foreach (var newO in newObjects) {
-                str += "New: " + newO + "\n";
-                if (newO.type == ExtInput.TileType.BLUE_ROD) {
-                    str += "Adding blue\n";
-                    inputListener.OnBlueRodAdded();
-                } else {
-                    str += "Adding red\n";
-                    inputListener.OnRedCubeAdded();
-                }
-            }
+            // foreach (var newO in newObjects) {
+            //     str += "New: " + newO + "\n";
+            //     if (newO.type == DominosOutput.TileType.BLUE_ROD) {
+            //         str += "Adding blue\n";
+            //         inputListener.OnBlueRodAdded();
+            //     } else {
+            //         str += "Adding red\n";
+            //         inputListener.OnRedCubeAdded();
+            //     }
+            // }
 
             Debug.LogError(str);
             inputCount++;
@@ -62,15 +62,17 @@ namespace Byjus.VisionTest.Verticals {
             currentObjects.Clear();
             currentObjects.AddRange(visionObjects);
 
+            inputListener.OnDominosUpdate(currentObjects);
+
             inputListener.ExtInputEnd();
 
             StartCoroutine(ListenForInput());
         }
 
-        void Segregate(List<ExtInput> visionObjects, out List<ExtInput> oldObjects, out List<ExtInput> commonObjects, out List<ExtInput> newObjects) {
-            oldObjects = new List<ExtInput>();
-            commonObjects = new List<ExtInput>();
-            newObjects = new List<ExtInput>();
+        void Segregate(List<DominosOutput> visionObjects, out List<DominosOutput> oldObjects, out List<DominosOutput> commonObjects, out List<DominosOutput> newObjects) {
+            oldObjects = new List<DominosOutput>();
+            commonObjects = new List<DominosOutput>();
+            newObjects = new List<DominosOutput>();
 
             int i = 0, j = 0;
             while (i < currentObjects.Count && j < visionObjects.Count) {
@@ -106,6 +108,7 @@ namespace Byjus.VisionTest.Verticals {
         void OnBlueRodRemoved();
         void OnRedCubeAdded();
         void OnRedCubeRemoved();
+        void OnDominosUpdate(List<DominosOutput> dominosOutput);
     }
 
 }

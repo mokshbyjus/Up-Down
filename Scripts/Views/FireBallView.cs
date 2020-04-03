@@ -14,15 +14,12 @@ public class FireBallView : MonoBehaviour {
         Shoot(side);
     }
 
-
     public void Shoot(Side side) {
+        Debug.LogError($"Shooting {side}");
         if (side == Side.LEFT) {
             fireBallTransform.localScale = new Vector3(-fireBallTransform.localScale.x, fireBallTransform.localScale.y, fireBallTransform.localScale.z);
-            Debug.LogError($"Shooting {fireBallRb}");
             fireBallRb.AddForce(transform.right * -bulletSpeed, ForceMode2D.Impulse);
         } else {
-
-            Debug.LogError($"Shooting {transform.right * bulletSpeed}");
             fireBallTransform.localScale = new Vector3(fireBallTransform.localScale.x, fireBallTransform.localScale.y, fireBallTransform.localScale.z);
             fireBallRb.AddForce(transform.right * bulletSpeed, ForceMode2D.Impulse);
         }

@@ -19,7 +19,7 @@ MonoBehaviour:
     GameID: VisionTest
     SectionID: samplegame
     AnalyticsID: 
-    RequiredTiles: 0
+    RequiredTiles: 2
     ContainerVersion: 1000011
     AssetBundlingFolder: AssetsToBundle
     LocalizationFolder: 

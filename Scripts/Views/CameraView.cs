@@ -6,11 +6,11 @@ public class CameraView : MonoBehaviour {
     [SerializeField] private float timeToReach = 1f;
     [SerializeField] private Transform playerTransform = null;
     [SerializeField] private LiftController liftController = null;
-    [SerializeField] private float offsetTravelTime = 10f;
-    [SerializeField] private float upOffset = 10f;
-    [SerializeField] private float downOffset = 10f;
+    // [SerializeField] private float offsetTravelTime = 10f;
+    // [SerializeField] private float upOffset = 10f;
+    // [SerializeField] private float downOffset = 10f;
     [SerializeField] private Ease cameraEase = new Ease();
-    [SerializeField] float effectThreshold = 0;
+    // [SerializeField] float effectThreshold = 0;
     private Sequence lerpTween = DOTween.Sequence();
     private Coroutine startCameraCr = null;
     private Coroutine endCameraCr = null;
@@ -21,21 +21,21 @@ public class CameraView : MonoBehaviour {
         cameraTransform = GetComponent<Transform>();
     }
 
-    private IEnumerator CameraMovementCoroutine(Vector3 endPoint, float offset) {
-        // float offset = Vector3.Distance(cameraTransform.position, endPoint);
-        lerpTween
-            .Append(cameraTransform.DOMove(endPoint, offsetTravelTime))
-            .SetEase(cameraEase);
-        lerpTween.Play();
-        while (liftController.isLiftMoving) {
-            if (playerTransform.position.y < cameraTransform.position.y) {
-                continue;
-            }
-            Debug.LogError("MOVING");
-            cameraTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cameraTransform.position.z);
-            yield return new WaitForEndOfFrame();
-        }
-    }
+    // private IEnumerator CameraMovementCoroutine(Vector3 endPoint, float offset) {
+    //     // float offset = Vector3.Distance(cameraTransform.position, endPoint);
+    //     lerpTween
+    //         .Append(cameraTransform.DOMove(endPoint, offsetTravelTime))
+    //         .SetEase(cameraEase);
+    //     lerpTween.Play();
+    //     while (liftController.isLiftMoving) {
+    //         if (playerTransform.position.y < cameraTransform.position.y) {
+    //             continue;
+    //         }
+    //         Debug.LogError("MOVING");
+    //         cameraTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cameraTransform.position.z);
+    //         yield return new WaitForEndOfFrame();
+    //     }
+    // }
 
     // public void StartCamera(int direction, int threshold) {
     //     if (threshold < effectThreshold) {
@@ -54,7 +54,12 @@ public class CameraView : MonoBehaviour {
     //     startCameraCr = StartCoroutine(CameraMovementCoroutine(endPoint, offset));
     // }
 
-    public void StartCamera(Vector3 toPos) {
+    public void StartCamera(Vector3 toPos,float timeToReach = -1) {
+        if(timeToReach == -1)
+        {
+            timeToReach = this.timeToReach;
+        }
+        Debug.LogError("Moving Camera.");
         cameraTransform.DOMove(new Vector3(toPos.x,toPos.y,cameraTransform.position.z), timeToReach)
             .SetEase(cameraEase);
     }

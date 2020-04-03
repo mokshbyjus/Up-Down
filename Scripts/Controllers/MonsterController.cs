@@ -7,8 +7,9 @@ public class MonsterController : MonoBehaviour {
     [SerializeField] private List<List<Transform>> monsterSpawnPosList = null;
     [SerializeField] private List<MonsterInfo> monsterInfos;
     [SerializeField] private GameObject monsterPrefab;
+    private List<GameObject> fallenMonsters = new List<GameObject>();
     public float monsterSpeed;
-
+    public float flyOffForce = 10f;
     private void Start() {
 
     }
@@ -38,7 +39,6 @@ public class MonsterController : MonoBehaviour {
             for (int i = 0, l = monsterInfos[floor].monsterGo.Count; i < l; i++) {
                 monsterModels.Add(monsterInfos[floor].monsterGo[i].GetComponent<MonsterView>().myModel);
             }
-            Debug.Log(monsterModels + " sadas");
         } catch (Exception e) {
             Debug.Log(e.StackTrace);
         }
@@ -59,8 +59,16 @@ public class MonsterController : MonoBehaviour {
         }
     }
 
-    public void OnFall(MonsterModel monsterModel ,GameObject monsterGo) {
-        monsterInfos[monsterModel.floor].monsterGo.RemoveAt(0);
+    public void OnFall(MonsterModel monsterModel, GameObject monsterGo) {
+        fallenMonsters.Add(monsterGo);
+        monsterInfos[monsterModel.floor].monsterGo.Remove(monsterGo);
+    }
+
+    public void SmashMonsters() {
+        foreach(var monster in fallenMonsters)
+        {
+            monster.GetComponent<MonsterView>().FlyOff();
+        }
     }
 }
 

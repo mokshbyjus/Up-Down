@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 namespace Byjus.VisionTest.Verticals {
     public interface IVisionService {
         void Init();
-        List<ExtInput> GetVisionObjects();
+        List<DominosOutput> GetVisionObjects();
     }
 
     public class StandaloneVisionService : IVisionService {
-        public List<ExtInput> GetVisionObjects() {
+        public List<DominosOutput> GetVisionObjects() {
             var numRed = Random.Range(0, 5);
             var numBlue = Random.Range(0, 5);
 
-            var ret = new List<ExtInput>();
-            for (int i = 0; i < numBlue; i++) { ret.Add(new ExtInput { type = ExtInput.TileType.BLUE_ROD, id = i }); }
-            for (int i = 0; i < numRed; i++) { ret.Add(new ExtInput { type = ExtInput.TileType.RED_CUBE, id = (numBlue + i) + 1000 }); }
+            var ret = new List<DominosOutput>();
+            // for (int i = 0; i < numBlue; i++) { ret.Add(new DominosOutput { type = DominosOutput.TileType.BLUE_ROD, id = i }); }
+            // for (int i = 0; i < numRed; i++) { ret.Add(new DominosOutput { type = DominosOutput.TileType.RED_CUBE, id = (numBlue + i) + 1000 }); }
 
             return ret;
         }
@@ -25,13 +25,11 @@ namespace Byjus.VisionTest.Verticals {
         }
     }
 
-    public class ExtInput {
-        public enum TileType { RED_CUBE, BLUE_ROD }
-        public TileType type;
-        public int id;
+    // private class DominosOutput {
+    //     public int id;
 
-        public override string ToString() {
-            return id + ", " + type;
-        }
-    }
+    //     public override string ToString() {
+    //         return id + " ";
+    //     }
+    // }
 }

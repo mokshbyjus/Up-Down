@@ -9,6 +9,7 @@ public class LiftController : MonoBehaviour {
     [SerializeField] private CameraView cameraView = null;
     [SerializeField] private List<Transform> levelsPositionsList;
     [SerializeField] private LiftView liftView;
+    [SerializeField] private float smashTime = 1f;
     [HideInInspector] public LiftModel liftModel = new LiftModel();
     private bool liftIsMoving = false;
     private Coroutine queueChecker = null;
@@ -45,6 +46,10 @@ public class LiftController : MonoBehaviour {
             AddFloorToQueue(2);
             AddFloorToQueue(7);
             AddFloorToQueue(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S)) {
+            LiftSmash();
         }
 
         if (!isLiftMoving) {
@@ -134,6 +139,9 @@ public class LiftController : MonoBehaviour {
 
     public void AddFloorToQueue(int floor) {
         if (floor > -1) {
+            if (floor > 10) {
+                floor = 10;
+            }
             Debug.Log($"Adding {floor} to queue");
             Enqueue(floor);
         }
@@ -157,6 +165,16 @@ public class LiftController : MonoBehaviour {
         // } else {
         //     StartCoroutine(QueueChecker());
         // }
+    }
+
+    public void LiftSmash() {
+        cameraView.StartCamera(levelsPositionsList[0].position, smashTime);
+        wizardController.OnLiftSmash();
+        liftView.LiftSmash(levelsPositionsList[0].position);
+    }
+
+    public void OnLiftSmashComplete() {
+        monsterController.SmashMonsters();
     }
 
     #endregion ------------------------------------------------------------------------------

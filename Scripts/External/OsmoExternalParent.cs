@@ -62,14 +62,14 @@ namespace Byjus.VisionTest.Externals {
             this.visionHelper = visionHelper;
         }
 
-        public List<ExtInput> GetVisionObjects() {
+        public List<DominosOutput> GetVisionObjects() {
             var aliveObjs = visionHelper.tangibleManager.AliveObjects;
-            var ret = new List<ExtInput>();
+            var ret = new List<DominosOutput>();
             foreach (var obj in aliveObjs) {
                 if (obj.Id < 10) {
-                    ret.Add(new ExtInput { id = obj.Id, type = ExtInput.TileType.BLUE_ROD });
+                    ret.Add(new DominosOutput { id = obj.Id });//, type = DominosOutput.TileType.BLUE_ROD });
                 } else {
-                    ret.Add(new ExtInput { id = obj.Id, type = ExtInput.TileType.RED_CUBE });
+                    ret.Add(new DominosOutput { id = obj.Id });//, type = DominosOutput.TileType.RED_CUBE });
                 }
             }
             return ret;

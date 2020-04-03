@@ -10,9 +10,9 @@ public class WizardController : MonoBehaviour {
     [SerializeField] private GameObject shootingWizard = null;
     public void ShootFireball(Side side) {
 
+        ShootingPosition(side);
         var fireball = Instantiate(fireBallPrefab, shootPoints[(int) side].position, Quaternion.identity);
         fireball.GetComponent<FireBallView>().Init(this, side);
-        ShootingPosition(side);
     }
 
     public void ShootingPosition(Side side) {
@@ -42,6 +42,10 @@ public class WizardController : MonoBehaviour {
         if (monsters.Count != 0) {
             ShootFireball(monsters[0].spawnSide);
         }
+    }
+
+    public void OnLiftSmash() {
+
     }
 
 }
